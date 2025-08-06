@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Enlace al CDN de Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  lin
+  <title>Obrian Estudios</title>
+  
+</head>
+<body>
+  <!--────────────────────────────────────
+      CABECERA
+  ─────────────────────────────────────-->
+  <header>
+    <div class="logo" onclick="navigateToSection('inicio')">Obrian Estudios</div>
+    <!-- Redes sociales en escritorio -->
+    <div class="social-icons">
+      <a href="https://www.instagram.com" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" title="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+    <button class="menu-btn" onclick="toggleMobileMenu()" aria-label="Abrir menú">☰</button>
+  </header>
+
+  <!-- Menú Móvil -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-btn" onclick="toggleMobileMenu()" aria-label="Cerrar menú">×</button>
+    <a href="#inicio" onclick="navigateToSection('inicio'); toggleMobileMenu()">Inicio</a>
+    <a href="#conocimientos" onclick="navigateToSection('conocimientos'); toggleMobileMenu()">Conocimientos</a>
+    <a href="#conoceme" onclick="navigateToSection('conoceme'); toggleMobileMenu()">Conóceme</a>
+    <a href="#portafolio" onclick="navigateToSection('portafolio'); toggleMobileMenu()">Portafolio</a>
+    <div class="mobile-social-icons">
+      <a href="https://www.instagram.com" target="_blank" title="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com" target="_blank" title="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" title="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </div>
+  </div>
+
+  <!--────────────────────────────────────
+      CONTENEDOR PRINCIPAL (scroll-snap)
+  ─────────────────────────────────────-->
+  <main id="scrollContainer">
+    <!-- Sección INICIO -->
+    <section id="inicio">
+      <div class="section-inner">
+        <div id="slider" class="image-slider" aria-live="polite">
+          
+          
+        </div>
+        <div class="sidebar" id="sidebarNav">
+          <button onclick="showSlide(0)" aria-label="Mostrar imagen 1"></button>
+          <button onclick="showSlide(1)" aria-label="Mostrar imagen 2"></button>
+          <button onclick="showSlide(2)" aria-label="Mostrar imagen 3"></button>
+          <button onclick="showSlide(3)" aria-label="Mostrar imagen 4"></button>
+        </div>
+        <div class="portafolio-button">
+          <a href="#portafolio" onclick="navigateToSection('portafolio')">Portafolio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección CONOCIMIENTOS -->
+    <section id="conocimientos">
+      <div class="section-inner conocimientos-full">
+        <div class="animacion-container">
+          <!-- Aquí insertas tu animación (CSS, Lottie, canvas, etc) -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección CONÓCEME -->
+    <section id="conoceme">
+      <div class="section-inner conoceme-full">
+        <div class="obrian-full">
+          <h2>Obrian</h2>
+          <p>
+            Diseñador multidisciplinar que mezcla emoción, narrativa y tecnología para crear experiencias digitales auténticas.
+          </p>
+          <div class="boxes">
+            <a href="#portafolio" class="box">
+              <img src="img/fondo.png" alt="Web y UX" />
+              <span>Web & UX</span>
+            </a>
+            <a href="#portafolio" class="box">
+              <img src="img/glitch-bg.png" alt="Ilustración y 3D" />
+              <span>Ilustración & 3D</span>
+            </a>
+            <a href="#portafolio" class="box">
+              <img src="img/way.png" alt="Animación y Storytelling" />
+              <span>Animación & Storytelling</span>
+            </a>
+          </div>
+          <button class="contactemos" onclick="window.location.href='mailto:hola@obrianestudios.com'">
+            Contactemos
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección PORTAFOLIO -->
+    <section id="portafolio">
+      <div class="section-inner">
+        <div class="portfolio-header">
+          <h1>Obrian Estudios</h1>
+          <button class="back-home" onclick="navigateToSection('inicio')">Inicio</button>
+        </div>
+        <nav class="portfolio-nav">
+          <ul>
+            <li data-category="diseno" class="active" onclick="changeCategory('diseno')">Diseño Web</li>
+            <li data-category="animaciones" onclick="changeCategory('animaciones')">Animaciones</li>
+            <li data-category="ilustraciones" onclick="changeCategory('ilustraciones')">Ilustraciones</li>
+          </ul>
+        </nav>
+        <div class="portfolio-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Menú Inferior -->
+  <nav class="bottom-menu">
+    <a href="#inicio" onclick="navigateToSection('inicio')">Inicio</a>
+    <a href="#conocimientos" onclick="navigateToSection('conocimientos')">Conocimientos</a>
+    <a href="#conoceme" onclick="navigateToSection('conoceme')">Conóceme</a>
+    <a href="#portafolio" onclick="navigateToSection('portafolio')">Portafolio</a>
+  </nav>
+
+  <!--────────────────────────────────────
+      SCRIPTS
+  ─────────────────────────────────────-->
+  <script src="dinamic.js"></script>
+ 
+</body>
+</html>

@@ -1,0 +1,1036 @@
+
+    /*────────────────────────────────────
+      1. Variables y Reset Global
+    ─────────────────────────────────────*/
+    :root {
+      --bg: #fff;
+      --text: #000;
+      --bg-alt: #f1f1f1;
+      --primary-border: #000;
+      --wrapper-bg: #f7f7f7; /* Fondo para wrappers de contenido */
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    * {
+  outline: 1px solid red;
+}
+
+    html, body {
+      height: 100%;
+      overscroll-behavior-x: contain;
+      font-family: sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+    html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+main {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+  *, *::before, *::after {
+  box-sizing: border-box;
+}
+
+    /*────────────────────────────────────
+      2. Contenedor Global (main) con scroll-snap
+    ─────────────────────────────────────*/
+    main {
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      display: flex;
+      flex-direction: row;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    main::-webkit-scrollbar {
+      display: none;
+    }
+
+    /*────────────────────────────────────
+      3. Cada sección ocupa el 100vw x 100vh
+    ─────────────────────────────────────*/
+    section {
+      scroll-snap-align: start;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+    }
+section {
+  flex: 0 0 100vw; /* cada sección ocupa exactamente una pantalla */
+  height: 100vh;
+  overflow: hidden; /* evita que su contenido desborde */
+  scroll-snap-align: start;
+  position: relative;
+}
+
+    /*────────────────────────────────────
+      4. Contenedor interno de cada sección (.section-inner)
+         con tamaño de 80vw x 90vh, centrado y con un borde visible.
+    ─────────────────────────────────────*/
+    .section-inner {
+      width: 95%; /* Ancho del 90% del contenedor */
+      height: 80%; /* Alto del 80% del contenedor */
+      /* border: 2px solid var(--primary-border); */ /* Comentamos el borde */
+      border-radius: 20px; /* Bordes redondeados */
+      background: var(--bg); /* Fondo blanco o el color definido en las variables */
+      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), 
+                  -8px -8px 15px rgba(255, 255, 255, 0.7); /* Sombra neumorfista */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin-top: 2rem; /* Ajusta este valor para moverlo más abajo */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    }
+    .section-inner {
+   width: 95vw;
+  max-width: 100vw; /* evita que crezca más que la pantalla */
+  height: 80vh;
+  padding: 1rem; /* opcional */
+  box-sizing: border-box;
+  overflow: auto; /* permite scroll interno si es necesario */
+  overflow: hidden;
+  position:relative;
+  padding-bottom: 20px;
+}
+
+
+    /* Efecto al pasar el cursor */
+    .section-inner:hover {
+      transform: scale(1.02); /* Efecto de escala al pasar el cursor */
+      box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.3), 
+                  -12px -12px 20px rgba(255, 255, 255, 0.8); /* Sombra más intensa */
+    }
+
+    /*────────────────────────────────────
+      5. Cabecera y Menú Móvil
+    ─────────────────────────────────────*/
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: var(--bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+      z-index: 10;
+      border-bottom: 1px solid var(--primary-border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    /* Logo en forma de círculo con estilo neumorfista */
+    /* Contenedor del logo y redes sociales en horizontal */
+    header {
+      display: flex; /* Alinea los elementos en una fila */
+      justify-content: space-between; /* Espacia el logo y las redes sociales */
+      align-items: center; /* Centra verticalmente los elementos */
+      padding: 0 1rem; /* Espaciado horizontal */
+      background: var(--bg); /* Fondo del header */
+      height: 80px; /* Altura del header */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Sombra ligera */
+      border-bottom: 1px solid var(--primary-border); /* Línea inferior */
+    }
+
+    /* Logo en forma de rectángulo redondeado con estilo neumorfista */
+    .logo {
+      width: auto; /* Ajusta el ancho automáticamente según el texto */
+      padding: 0.5rem 1rem; /* Espaciado interno */
+      background: var(--bg); /* Fondo blanco o el color definido en las variables */
+      border-radius: 20px; /* Bordes redondeados */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: var(--text); /* Color del texto */
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), 
+                  inset -2px -2px 4px rgba(255, 255, 255, 0.8); /* Sombra neumorfista hacia adentro */
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    }
+
+    /* Efecto al pasar el cursor sobre el logo */
+    .logo:hover {
+      transform: scale(1.05); /* Efecto de escala */
+      box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.25), 
+                  inset -3px -3px 6px rgba(255, 255, 255, 0.9); /* Sombra más intensa hacia adentro */
+    }
+
+    /* Redes sociales en escritorio */
+    .social-icons {
+      display: flex; /* Alinea los iconos en una fila */
+      gap: 1rem; /* Espaciado entre los iconos */
+      justify-content: flex-end; /* Alinea los iconos a la derecha */
+      margin-right: 1rem; /* Espaciado desde el borde derecho */
+    }
+
+    .social-icons a {
+      width: 40px; /* Tamaño del círculo */
+      height: 40px;
+      background: var(--bg); /* Fondo blanco o el color definido en las variables */
+      border-radius: 50%; /* Forma circular */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text); /* Color del icono */
+      text-decoration: none; /* Elimina el subrayado */
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), 
+                  inset -2px -2px 4px rgba(255, 255, 255, 0.8); /* Sombra neumorfista hacia adentro */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.1); /* Efecto de escala */
+      box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.25), 
+                  inset -3px -3px 6px rgba(255, 255, 255, 0.9); /* Sombra más intensa hacia adentro */
+    }
+
+    .social-icons a i {
+      font-size: 1.2rem; /* Tamaño del icono */
+    }
+    .menu-btn {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: none;
+    }
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 20;
+    }
+    .mobile-menu.active {
+      transform: translateY(0);
+    }
+    .mobile-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .mobile-menu .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+    .mobile-social-icons {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+    }
+    .mobile-social-icons a {
+      color: #fff;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .mobile-social-icons a:hover {
+      color: #ccc;
+    }
+
+    /*────────────────────────────────────
+      6. Menú Inferior
+    ─────────────────────────────────────*/
+    .bottom-menu {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--bg);
+      border-top: 1px solid #ccc;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+      z-index: 10;
+    }
+    .bottom-menu a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .bottom-menu a:hover {
+      color: #666;
+    }
+
+    /*────────────────────────────────────
+      7. Sección INICIO: Slider y Sidebar (solo en INICIO)
+    ─────────────────────────────────────*/
+   main {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  width: 100vw;
+  height: 100vh;
+}
+#inicio .section-inner {
+  max-width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+    #inicio .image-slider {
+      width: 100%;
+      height: 100%;
+      /* Aquí va el contenido del slider; el borde ya lo tiene .section-inner */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: bold;
+      transition: opacity 0.3s ease-in-out;
+      object-fit: cover;
+    }
+    #inicio {
+      scroll-snap-align: start; /* Asegura que la sección se alinee al inicio */
+      margin-top: 0; /* Elimina cualquier margen superior que pueda causar problemas */
+      height: 100vh; /* Asegura que la sección ocupe toda la altura de la ventana */
+    }
+    #slider {
+      transition: opacity 0.3s ease-in-out; /* Transición suave de opacidad */
+      
+    }
+    #slider {
+  width: 400px;   /* ancho fijo o relativo */
+  height: 300px;  /* altura fija */
+  overflow: hidden; /* oculta lo que salga fuera */
+  position: relative;
+}
+
+    /* Sidebar solo se muestra en INICIO */
+    /* Contenedor del Sidebar */
+    #inicio .sidebar {
+      position: absolute;
+      top: 50%;
+      right: 2rem; /* Alineado a la derecha */
+      transform: translateY(-50%); /* Centra verticalmente el sidebar */
+      display: flex;
+      flex-direction: column; /* Alinea los botones en una columna */
+      gap: 1rem; /* Espaciado entre los botones */
+      z-index: 10;
+    }
+
+    /* Línea vertical que atraviesa los botones */
+    #inicio .sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%; /* Centra la línea respecto al sidebar */
+      width: 2px; /* Grosor de la línea */
+      background: var(--text); /* Color de la línea */
+      transform: translateX(-50%); /* Ajusta la posición horizontal */
+      z-index: -1; /* Coloca la línea detrás de los botones */
+    }
+
+    /* Botones del Sidebar */
+    #inicio .sidebar button {
+      position: relative;
+      width: 20px; /* Aumentamos el tamaño del botón */
+      height: 20px; /* Aumentamos el tamaño del botón */
+      border: none;
+      border-radius: 50%; /* Forma circular */
+      background: var(--bg); /* Fondo blanco o el color definido en las variables */
+      cursor: pointer;
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), 
+                  inset -2px -2px 4px rgba(255, 255, 255, 0.8); /* Sombra neumorfista hacia adentro */
+    }
+
+    /* Línea vertical que atraviesa los botones */
+    #inicio .sidebar::before {
+      content: '';
+      position: absolute;
+      top: -20%; /* Extiende la línea hacia arriba */
+      bottom: -20%; /* Extiende la línea hacia abajo */
+      left: 50%; /* Centra la línea respecto al sidebar */
+      width: 4px; /* Grosor de la línea */
+      background: var(--text); /* Color de la línea */
+      border-radius: 4px; /* Puntas completamente redondeadas */
+      transform: translateX(-50%); /* Ajusta la posición horizontal */
+      z-index: -1; /* Coloca la línea detrás de los botones */
+    }
+
+    /* Círculo más grande detrás de cada botón */
+    #inicio .sidebar button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 35px; /* Tamaño del círculo más grande */
+      height: 35px;
+      background: var(--bg); /* Fondo blanco o el color definido en las variables */
+      border-radius: 50%; /* Forma circular */
+      transform: translate(-50%, -50%); /* Centra el círculo detrás del botón */
+      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), 
+                  -8px -8px 15px rgba(255, 255, 255, 0.7); /* Sombra neumorfista */
+      z-index: -1; /* Coloca el círculo detrás del botón */
+    }
+
+    /* Botón activo */
+    #inicio .sidebar button.active {
+      background: var(--text); /* Fondo del botón activo */
+      box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.25), 
+                  inset -3px -3px 6px rgba(255, 255, 255, 0.9); /* Sombra más intensa hacia adentro */
+    }
+
+    /* Espaciado entre los botones */
+    #inicio .sidebar {
+      gap: 2rem; /* Aumentamos el espacio entre los botones */
+    }
+    /* Botón "Portafolio" en escritorio */
+    .portafolio-button {
+      position: absolute; /* Posición absoluta para mayor control */
+      bottom: 2rem; /* Ubícalo cerca de la parte inferior */
+      right: 2rem; /* Alineado a la derecha */
+      z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+    }
+
+    .portafolio-button a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem; /* Espaciado interno */
+      font-size: 1rem; /* Tamaño del texto */
+      font-weight: bold; /* Texto en negrita */
+      color: var(--text); /* Color del texto */
+      background: var(--bg); /* Fondo blanco o el color definido en las variables */
+      border-radius: 20px; /* Bordes redondeados */
+      text-decoration: none; /* Elimina el subrayado */
+      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), 
+                  -8px -8px 15px rgba(255, 255, 255, 0.7); /* Sombra neumorfista */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+      cursor: pointer;
+    }
+
+    /* Efecto al pasar el cursor sobre el botón */
+    .portafolio-button a:hover {
+      transform: scale(1.05); /* Efecto de escala */
+      box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.3), 
+                  -12px -12px 20px rgba(255, 255, 255, 0.8); /* Sombra más intensa */
+      color: #fff; /* Cambia el color del texto */
+      background: var(--text); /* Cambia el fondo al color principal */
+    }
+   .portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  width: 100%;
+  padding: 0 1rem;
+
+  max-height: 600px;      /* Limita la altura del contenedor */
+  overflow-y: auto;       /* Scroll vertical cuando el contenido se pase */
+  overflow-x: hidden;     /* Evita scroll horizontal */
+}
+
+
+    /*────────────────────────────────────
+      8. Sección CONOCIMIENTOS ("Desarrollo Web")
+    ─────────────────────────────────────*/
+    #conocimientos .desarrollo-container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+    #conocemientos .section-inner {
+  max-width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+    /*────────────────────────────────────
+      9. Sección CONÓCEME ("Obrian")
+         Con contenido resaltado por un wrapper
+    ─────────────────────────────────────*/
+   #conoceme .section-inner {
+  max-width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+
+    .obrian-full {
+      width: 100%;
+      max-width: 1200px;
+      text-align: center;
+    }
+
+    .obrian-full h2 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+    }
+
+    .obrian-full p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .obrian-full .boxes {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .obrian-full .box {
+      flex: 1 1 300px;
+      background: var(--bg);
+      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.15), -8px -8px 15px rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      font-weight: bold;
+      text-align: center;
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .obrian-full .box:hover {
+      transform: scale(1.05);
+      box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.2), -12px -12px 20px rgba(255, 255, 255, 0.9);
+    }
+
+    .obrian-full .box img {
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+    }
+
+    .obrian-full .box span {
+      display: block;
+      font-size: 1.1rem;
+    }
+
+    .obrian-full .contactemos {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .obrian-full .contactemos:hover {
+      background: #333;
+    }
+    .conoceme-full {
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden; /* evita desbordamientos */
+}
+
+.obrian-full {
+  margin-top: -30px; /* Sube visualmente todo el bloque */
+}
+.box img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* o 'contain' si prefieres que no se recorte nada */
+  display: block;
+}
+
+
+
+    
+    /*────────────────────────────────────
+      10. Sección PORTAFOLIO
+         Con wrapper para centrar y resaltar contenido
+    ─────────────────────────────────────*/
+    /* Estructura base de la cuadrícula que ya tenías */
+    /* Sección PORTAFOLIO */
+    #portafolio .section-inner {
+      width: 95%;
+      height: 80%;
+      border-radius: 20px;
+      background: var(--bg);
+      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), 
+                  -8px -8px 15px rgba(255, 255, 255, 0.7);
+      padding: 2rem;
+      padding-top: 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 2rem;
+    }
+#portafolio .section-inner {
+  max-width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+    #portafolio .section-inner:hover {
+      transform: scale(1.02);
+      box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.3), 
+                  -12px -12px 20px rgba(255, 255, 255, 0.8);
+    }
+
+    .portfolio-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .portfolio-header h1 {
+      font-size: 2rem;
+      text-align: center;
+      flex: 1;
+    }
+
+    .back-home {
+      position: absolute;
+      right: 0;
+      background: #000;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-home:hover {
+      background: #333;
+    }
+
+    .portfolio-nav {
+      margin-bottom: 1.5rem;
+    }
+
+    .portfolio-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0;
+    }
+
+    .portfolio-nav li {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border: 1px solid #000;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .portfolio-nav li:hover,
+    .portfolio-nav li.active {
+      background: #000;
+      color: #fff;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Más anchas */
+      gap: 2rem;
+      justify-items: center;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .portfolio-item {
+      width: 100%;
+      max-width: 600px; /* Para que no se estiren demasiado en pantallas grandes */
+      background: var(--bg);
+      border-radius: 20px;
+      box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.15), -8px -8px 15px rgba(255, 255, 255, 0.7);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 250px; /* <-- Esto mantiene la altura libre */
+    }
+
+    .portfolio-item img {
+      max-width: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+      /* margin-bottom: 0.75rem; */
+      height: 200px;
+
+      display: block;
+    }
+
+    .portfolio-item span {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    #conocimientos .video-wrapper {
+      width: 80%;
+      max-width: 800px;
+      border: 2px solid var(--primary-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
+    }
+
+    #conocimientos video {
+      width: 80%;
+      height: auto;
+      display: block;
+    }
+
+    /*────────────────────────────────────
+      11. Responsive (max-width: 768px)
+    ─────────────────────────────────────*/
+    @media (max-width: 768px) {
+      .menu-btn {
+        display: block;
+      }
+      .menu-btn {
+        width: 50px; /* Tamaño del círculo */
+        height: 50px;
+        background: var(--bg); /* Fondo blanco o el color definido en las variables */
+        border-radius: 50%; /* Forma circular */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem; /* Tamaño del ícono */
+        color: var(--text); /* Color del ícono */
+        border: none; /* Sin borde */
+        box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), 
+                    inset -2px -2px 4px rgba(255, 255, 255, 0.8); /* Sombra neumorfista hacia adentro */
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+      }
+      /* Animación de entrada para los enlaces del menú móvil */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px); /* Comienza ligeramente desplazado hacia abajo */
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0); /* Vuelve a su posición original */
+        }
+      }
+
+      .mobile-menu a {
+        animation: fadeIn 0.3s ease-in-out; /* Aplica la animación */
+        opacity: 0; /* Oculta inicialmente */
+        animation-fill-mode: forwards; /* Asegura que la animación se mantenga en el estado final */
+      }
+
+      .mobile-menu a:nth-child(1) {
+        animation-delay: 0.1s; /* Retraso para el primer enlace */
+      }
+
+      .mobile-menu a:nth-child(2) {
+        animation-delay: 0.2s; /* Retraso para el segundo enlace */
+      }
+
+      .mobile-menu a:nth-child(3) {
+        animation-delay: 0.3s; /* Retraso para el tercer enlace */
+      }
+
+      .mobile-menu a:nth-child(4) {
+        animation-delay: 0.4s; /* Retraso para el cuarto enlace */
+      }
+
+      /* Efecto al pasar el cursor sobre el botón */
+      .menu-btn:hover {
+        transform: scale(1.05); /* Efecto de escala */
+        box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.25), 
+                    inset -3px -3px 6px rgba(255, 255, 255, 0.9); /* Sombra más intensa */
+      }
+      .bottom-menu {
+        display: none;
+      }
+      .social-icons {
+        display: none;
+      }
+      /* Iconos de redes sociales en el menú móvil */
+      .mobile-social-icons a {
+        width: 40px; /* Tamaño del círculo */
+        height: 40px;
+        background: var(--bg); /* Fondo blanco o el color definido en las variables */
+        border-radius: 50%; /* Forma circular */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        color: var(--text); /* Color del texto o icono */
+        text-decoration: none;
+        box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), 
+                    inset -2px -2px 4px rgba(255, 255, 255, 0.8); /* Sombra neumorfista hacia adentro */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+      }
+
+      /* Efecto al pasar el cursor sobre los iconos del menú móvil */
+      .mobile-social-icons a:hover {
+        transform: scale(1.05); /* Efecto de escala */
+        box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.25), 
+                    inset -3px -3px 6px rgba(255, 255, 255, 0.9); /* Sombra más intensa hacia adentro */
+      }
+      main {
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+      }
+      .section-inner {
+        margin-top: 4rem; /* Añade un margen superior para moverlo hacia abajo */
+        height: 85vh;
+      }
+      section {
+        scroll-snap-align: start;
+        min-height: 100vh;
+        border-bottom: 1px solid #ccc;
+      }
+      #inicio .sidebar {
+        /* position: static; */ /* Elimina la posición absoluta */
+        top: 80vh; /* Resetea la posición vertical */
+        left: 2vw; /* Resetea la posición horizontal */
+        transform: none; /* Elimina la transformación */
+        flex-direction: row; /* Cambia a diseño horizontal */
+        justify-content: center; /* Centra los botones horizontalmente */
+        gap: 2rem; /* Mantiene el espacio entre los botones */
+        margin-top: 1rem; /* Añade un margen superior para separarlo de la imagen */
+        top: 95%; /* Elimina la posición vertical fija */
+        margin-top: -1rem; /* Mueve el sidebar más cerca del slider */
+        justify-content: center; /* Centra los botones horizontalmente */
+      }
+      #inicio .sidebar::before {
+        content: ''; /* Asegura que el pseudo-elemento exista */
+        position: absolute;
+        top: 50%; /* Centra la barra horizontalmente */
+        left: 130px; /* Alinea la barra al inicio */
+        right: 0; /* Extiende la barra hasta el final */
+        height: 4px; /* Grosor de la barra */
+        background: var(--text); /* Color de la barra */
+        border-radius: 2px; /* Bordes redondeados */
+        transform: translateY(-50%); /* Ajusta la posición vertical */
+        width: 240px;
+        z-index: -1; /* Coloca la barra detrás de los botones */
+      }
+      .sidebar {
+        transform: none;
+        flex-direction: row;
+      }
+      #slider {
+        margin-bottom: 2rem;
+      }
+      .portafolio-button {
+        display: none;
+      }
+      #conoceme .section-inner.conoceme-full {
+        width: 95vw;
+        height: 85vh;
+        border-radius: 20px; /* Bordes redondeados */
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), 
+                    -8px -8px 15px rgba(255, 255, 255, 0.7);
+      }
+      section-inner:hover {
+        transform: scale(1.02);
+        box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.3), 
+                    -12px -12px 20px rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    /* Estilos para móvil (COPIA ESTE BLOQUE) */
+    @media (max-width: 768px) {
+      #conoceme .section-inner {
+        width: 95vw;
+        height: auto;
+        min-height: 85vh;
+        border-radius: 20px;
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), -8px -8px 15px rgba(255, 255, 255, 0.7);
+        padding: 1rem;
+        position: relative;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #conoceme .section-inner::-webkit-scrollbar {
+        display: none;
+      }
+
+      #conoceme .obrian-full {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        padding: 1rem 0;
+        align-items: center;
+      }
+
+      #conoceme .obrian-full h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      #conoceme .obrian-full p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        text-align: center;
+        padding: 0 1rem;
+      }
+
+      #conoceme .boxes {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+        align-items: center;
+      }
+
+      #conoceme .box {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        padding: 0.8rem;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin: 0 auto;
+      }
+
+      #conoceme .box img {
+        width: 100%;
+        max-height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+      }
+
+      #conoceme .box span {
+        font-size: 0.9rem;
+        font-weight: bold;
+        line-height: 1.2;
+      }
+
+      #conoceme .contactemos {
+        display: none; /* Mantiene el botón oculto en móviles, como en tu CSS */
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        margin: 1rem auto 2rem auto;
+      }
+
+      /* Reorganizar la cabecera de portafolio: apilar título y botón */
+      #portafolio .portfolio-header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: static;
+        margin-bottom: 1rem;
+      }
+      #portafolio .portfolio-header h1 {
+        font-size: 1.8rem; /* Ajusta el tamaño si lo prefieres */
+        margin-bottom: 0.5rem;
+      }
+      #portafolio .portfolio-grid {
+        width: 100%;
+        padding: 0 1rem; /* Ajusta este padding si es necesario */
+        overflow: hidden; /* Evita que se desborden */
+      }
+      #portafolio .portfolio-item {
+        box-sizing: border-box; /* Incluye el padding y borde en el ancho */
+        width: 100%;
+        max-width: 100%;
+        height: 300px;
+        margin: 0; /* Asegúrate de que no se agreguen márgenes que causen overflow */
+      }
+      #portafolio .portfolio-grid {
+        overflow-y: auto;
+        max-height: 50vh; /* Puedes ajustar este valor según el espacio disponible */
+      }
+      /* El botón "back-home" se posiciona de forma estática y se alinea a la izquierda */
+      #portafolio .back-home {
+        position: static;
+        align-self: flex-start;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+      }
+      /* La navegación se alinea a la izquierda */
+      #portafolio .portfolio-nav {
+        width: 100%;
+        text-align: left;
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.8rem; /* Aumentado para mejor legibilidad */
+      }
+    }
